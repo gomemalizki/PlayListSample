@@ -33,6 +33,7 @@ public class MainViewModel : BaseViewModel
     public ICommand SaveCommand { get; }
     public ICommand ToggleWatchedCommand { get; }
     public ICommand ClearFormCommand { get; }
+    public ICommand ShowVideoCommand { get; }
 
     private Task load;
     public MainViewModel(IVideoService videoService)
@@ -60,6 +61,10 @@ public class MainViewModel : BaseViewModel
                 OnPropertyChanged();
             }
         }
+    }
+    private async Task NavigateToDetails(VideoItem v)
+    {
+        Dictionary<string, object> params= new Dictionary() { "item"}
     }
 
     public string CurrentPositionText

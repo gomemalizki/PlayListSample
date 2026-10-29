@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlayListSample.Views.VideoDetailsPage"
+             Title="VideoDetailsPage"
+             xmlns:vm="clr-namespace:PlayListSample.ViewModels"
+             x:DataType="vm:VideoDetailsVM"
+             >
+    
+    <VerticalStackLayout>
+        <Label 
+            Text="{Binding Video.Title}"
+            TextColor="Aquamarine"
+            FontSize="30"
+            VerticalOptions="Start" 
+            HorizontalOptions="Center" />
+        <Label
+            Text="{Binding Video.Url}"
+            TextColor="AliceBlue"
+            FontSize="30"
+            HorizontalOptions="Center"
+            />
+        <Label
+            Text="{Binding Video.Id}"
+            TextColor="AliceBlue"
+            FontSize="30"
+            HorizontalOptions="Center"
+            />
+        <Label
+            Text="{Binding Video.IsWatched}"
+            TextColor="AliceBlue"
+            FontSize="30"
+            HorizontalOptions="Center"
+            />
+        
+    </VerticalStackLayout>
+</ContentPage>
