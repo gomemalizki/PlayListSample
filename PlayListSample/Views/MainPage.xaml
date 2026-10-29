@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:PlayListSample.ViewModels"
+    xmlns:models="clr-namespace:PlayListSample.Models"
     Title="{Binding Title}"
     x:DataType="vm:MainViewModel"
     FlowDirection="RightToLeft">
@@ -24,14 +25,47 @@
                 IsVisible="{Binding IsLoading}" />
 
             <!--  כרטיסייה 1: דפדוף ותצוגת פריט בודד מתוך השירות הסטטי  -->
-            <Border Padding="14" StrokeShape="RoundRectangle 8">
+            <CollectionView ItemsSource="{Binding Videos}" >
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout>
+                        <Image Source="dotnet_bot.png"/>
+                        <Label Text="אין מה לראות פה" TextColor="LightPink"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:VideoItem">
+                        <VerticalStackLayout>
+                            <Label
+     FontAttributes="Bold"
+     FontSize="15"
+     Text="{Binding Title, StringFormat='כותרת: {0}'}" />
+
+                            <Label Text="{Binding ChannelName, StringFormat='ערוץ: {0}'}" />
+
+                            <Label Text="{Binding FormattedDuration, StringFormat='משך: {0}'}" />
+
+                            <Label
+     LineBreakMode="TailTruncation"
+     Text="{Binding Url, StringFormat='כתובת אינטרנט: {0}'}"
+     TextColor="DarkBlue" />
+
+                            <Label Text="{Binding WatchedStatusText, StringFormat='סטטוס: {0}'}" />
+
+                            <Button CommandParameter="{Binding .}" Command="{Binding x:DataType='vm:MainViewModel', Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type vm:MainViewModel}}, Path=ToggleWatchedCommand}" Text="שנה סטטוס צפייה" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+            <!--<Border Padding="14" StrokeShape="RoundRectangle 8">
                 <VerticalStackLayout Spacing="10">
                     <Label
                         FontAttributes="Bold"
                         FontSize="16"
                         Text="דפדוף בסרטונים (תצוגת פריט בודד)" />
 
-                    <!--  סרגל דפדוף  -->
+                    --><!--  סרגל דפדוף  --><!--
                     <Grid ColumnDefinitions="Auto, *, Auto">
                         <Button
                             Grid.Column="0"
@@ -53,7 +87,7 @@
 
                     <BoxView HeightRequest="1" Color="LightGray" />
 
-                    <!--  פרטי הפריט הנוכחי המוצג על המסך  -->
+                    --><!--  פרטי הפריט הנוכחי המוצג על המסך  --><!--
                     <Label
                         FontAttributes="Bold"
                         FontSize="15"
@@ -72,7 +106,7 @@
 
                     <Button Command="{Binding ToggleWatchedCommand}" Text="שנה סטטוס צפייה" />
                 </VerticalStackLayout>
-            </Border>
+            </Border>-->
 
             <!--  כרטיסייה 2: טופס הזנה של פריט בודד  -->
             <Border Padding="14" StrokeShape="RoundRectangle 8">
